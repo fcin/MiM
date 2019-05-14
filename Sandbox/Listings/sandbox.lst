@@ -1,0 +1,109 @@
+A51 MACRO ASSEMBLER  SANDBOX                                                              04/28/2019 18:36:04 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\sandbox.obj
+ASSEMBLER INVOKED BY: D:\Programs\Keil uVision\C51\BIN\A51.EXE sandbox.a51 SET(SMALL) DEBUG PRINT(.\Listings\sandbox.lst
+                      ) OBJECT(.\Objects\sandbox.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0010                 1     Buffer DATA 10h
+  0020                 2     J DATA 20h
+  0021                 3     K DATA 21h
+  0022                 4     N DATA 22h
+----                   5     CSEG AT 0
+0000 2100              6             JMP start
+----                   7     CSEG AT 100h
+0100                   8     start:
+0100 3147              9             CALL init
+0102 3104             10             CALL run
+                      11     
+0104                  12     run:
+0104 3108             13             CALL random
+0106 80FC             14             JMP run
+                      15     
+0108                  16     random: 
+0108 E522             17             MOV A, N        ; Ustaw N w zakresie 0-9
+010A 75F00A           18             MOV B, #10d
+010D 84               19             DIV AB
+010E 85F022           20             MOV N, B
+                      21     
+0111 E520             22             MOV A, J        ; Ustaw J w zakresie 0-9
+0113 2522             23             ADD A, N
+0115 75F00A           24             MOV B, #10d
+0118 84               25             DIV AB
+0119 85F020           26             MOV J, B
+                      27             
+011C E521             28             MOV A, K        ; Ustaw K w zakresie 0-9
+011E 2522             29             ADD A, N
+0120 75F00A           30             MOV B, #10d
+0123 84               31             DIV AB
+0124 85F021           32             MOV K, B
+                      33             
+0127 7410             34             MOV A, #Buffer  ; Wez wartosc Buffer + offset
+0129 2520             35             ADD A, J
+012B F8               36             MOV R0, A
+                      37             
+012C 7410             38             MOV A, #Buffer  ; Wez wartosc Buffer + offset
+012E 2521             39             ADD A, K
+0130 F9               40             MOV R1, A
+                      41     
+0131 E6               42             MOV A, @R0      ; Buffer + J
+0132 27               43             ADD A, @R1      ; A + (Buffer + K)
+0133 75F004           44             MOV B, #4d
+0136 84               45             DIV AB          ; Ustaw nowa liczbe w zakresie 0-3
+                      46             
+0137 7410             47             MOV A, #Buffer
+0139 2522             48             ADD A, N
+013B F9               49             MOV R1, A
+013C A7F0             50             MOV @R1, B
+                      51             
+013E E5F0             52             MOV A, B        ; Ustaw nowa wartosc w pozycji Buffer(n)
+                      53             
+0140 0520             54             INC J
+0142 0521             55             INC K
+0144 0522             56             INC N
+0146 22               57             RET
+A51 MACRO ASSEMBLER  SANDBOX                                                              04/28/2019 18:36:04 PAGE     2
+
+                      58      
+0147                  59     init:
+0147 752006           60             MOV J, #6d
+014A 752109           61             MOV K, #9d
+014D 751004           62             MOV Buffer + 0, #4d
+0150 751105           63             MOV Buffer + 1, #5d
+0153 751203           64             MOV Buffer + 2, #3d
+0156 751303           65             MOV Buffer + 3, #3d
+0159 751403           66             MOV Buffer + 4, #3d
+015C 751504           67             MOV Buffer + 5, #4d
+015F 751606           68             MOV Buffer + 6, #6d
+0162 751702           69             MOV Buffer + 7, #2d
+0165 751806           70             MOV Buffer + 8, #6d
+0168 751905           71             MOV Buffer + 9, #5d
+016B 22               72             RET
+                      73             
+                      74     END
+A51 MACRO ASSEMBLER  SANDBOX                                                              04/28/2019 18:36:04 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+BUFFER . . . . . .  D ADDR   0010H   A   
+INIT . . . . . . .  C ADDR   0147H   A   
+J. . . . . . . . .  D ADDR   0020H   A   
+K. . . . . . . . .  D ADDR   0021H   A   
+N. . . . . . . . .  D ADDR   0022H   A   
+RANDOM . . . . . .  C ADDR   0108H   A   
+RUN. . . . . . . .  C ADDR   0104H   A   
+START. . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

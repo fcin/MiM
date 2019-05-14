@@ -1,0 +1,66 @@
+A51 MACRO ASSEMBLER  LAB3                                                                 05/14/2019 12:39:35 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\lab3.obj
+ASSEMBLER INVOKED BY: D:\Programs\Keil uVision\C51\BIN\A51.EXE lab3.a51 SET(SMALL) DEBUG PRINT(.\Listings\lab3.lst) OBJE
+                      CT(.\Objects\lab3.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+----                   1     CSEG AT 0
+0000 2100              2     JMP start
+                       3     
+0003                   4     ORG 0003h
+0003 020111            5             LJMP lab1
+                       6             
+0023                   7     ORG 0023h
+0023 020111            8             LJMP lab1
+                       9             
+0013                  10     ORG 0013h
+0013 020111           11             LJMP lab1
+                      12     
+----                  13     CSEG AT 100h
+0100                  14      start:
+0100 D2A8             15             SETB IE.0
+0102 D2AD             16             SETB IE.5
+0104 D2AF             17             SETB IE.7
+                      18             ;MOV IE, #85h
+                      19             ;MOV TH0,#76
+                      20             ;MOV TL0,#01
+0106                  21             MOV U1, #5
+*** _____________________________________^
+*** ERROR #A45 IN 21 (lab3.a51, LINE 21): UNDEFINED SYMBOL (PASS-2)
+0109 758901           22             MOV TMOD,#01 ; 16-bitowy timer 0
+010C D28C             23             SETB TR0 ; startujemy timer 0
+010E 308DFD           24             JNB TF0,$ ;Jezeli TF0 nie jest ustawione to nie ma przepelnie 
+                      25                     
+0111                  26             lab1:
+0111 758C00           27                     MOV TH0,#0h
+0114 758A00           28                     MOV TL0,#0h
+0117 7405             29                     MOV A, #5
+0119 32               30                     RETI
+                      31     END 
+A51 MACRO ASSEMBLER  LAB3                                                                 05/14/2019 12:39:35 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+IE . . . . . . . .  D ADDR   00A8H   A   
+LAB1 . . . . . . .  C ADDR   0111H   A   
+START. . . . . . .  C ADDR   0100H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+U1 . . . . . . . .    ----   -----       
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 1 ERROR(S)

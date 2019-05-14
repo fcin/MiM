@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\sandbox.obj" 
+TO ".\Objects\Sandbox" 
+PRINT(".\Listings\Sandbox.m51") RAMSIZE(256) 
